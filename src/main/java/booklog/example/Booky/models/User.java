@@ -32,6 +32,7 @@ public class User {
     @Size(max = 20)
     private String password;
 
+   private boolean enabled;
    @DBRef
    private Set<Role> roles;
 
@@ -79,6 +80,13 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 }
 
