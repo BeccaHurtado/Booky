@@ -4,13 +4,20 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
 import nonapi.io.github.classgraph.json.Id;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.data.mongodb.core.index.IndexDirection;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import javax.management.relation.Role;
+import java.util.Set;
 
 @Document(collection = "users")
 public class User {
 
    @Id
    private String id;
+   @Indexed(unique = true, direction = IndexDirection.DESCENDING)
 
    @NotNull
    @Size(max = 10)
@@ -24,6 +31,9 @@ public class User {
    @NotNull
     @Size(max = 20)
     private String password;
+
+   @DBRef
+   private Set<Role> roles;
 
     public User(String username, String email, String password) {
         this.username = username;
@@ -61,6 +71,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }
 
