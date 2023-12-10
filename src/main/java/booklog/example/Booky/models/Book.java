@@ -1,20 +1,23 @@
 package booklog.example.Booky.models;
 
-import nonapi.io.github.classgraph.json.Id;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "books")
-public class Books {
+@Document("book")
+@Data
+public class Book {
     @Id
-    String id;
-    String bookName;
-    String bookDesc;
-    String bookNotes;
+    private String id;
+    private String bookName;
+    private String bookDesc;
+    private String bookNotes;
 
-    public Books() {
-    }
-        public Books(String bookName, String bookDesc, String bookNotes) {
+        public Book(String id, String bookName, String bookDesc, String bookNotes) {
             super();
+            this.id = id;
             this.bookName = bookName;
             this.bookDesc = bookDesc;
             this.bookNotes = bookNotes;
